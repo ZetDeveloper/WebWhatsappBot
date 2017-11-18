@@ -6,4 +6,4 @@
 
 
 # License
-WebWhatsappBot is released under the MIT license. See [License](https://github.com/ZetDeveloper/WebWhatsappBot/blob/master/README.md) for details.
+WebWhatsappBot is released under the MIT license. See [License](https://github.com/ZetDeveloper/WebWhatsappBot/blob/master/LICENSE) for details.
