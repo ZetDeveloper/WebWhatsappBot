@@ -1,0 +1,347 @@
+\hypertarget{class_web_whatsapp_a_p_i_1_1_base_class}{}\section{Web\+Whatsapp\+A\+P\+I.\+Base\+Class Class Reference}
+\label{class_web_whatsapp_a_p_i_1_1_base_class}\index{Web\+Whatsapp\+A\+P\+I.\+Base\+Class@{Web\+Whatsapp\+A\+P\+I.\+Base\+Class}}
+Inheritance diagram for Web\+Whatsapp\+A\+P\+I.\+Base\+Class\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_web_whatsapp_a_p_i_1_1_base_class}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_auto_save_settings}{Auto\+Save\+Settings}
+\begin{DoxyCompactList}\small\item\em The save settings of the an driver \end{DoxyCompactList}\item 
+class \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_chat_settings}{Chat\+Settings}
+\begin{DoxyCompactList}\small\item\em The settings of the an driver \end{DoxyCompactList}\item 
+class \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_msg_args}{Msg\+Args}
+\begin{DoxyCompactList}\small\item\em Arguments used by Msg event \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a33f2d663d89b991fead5ff2aba0dbc3c}\label{class_web_whatsapp_a_p_i_1_1_base_class_a33f2d663d89b991fead5ff2aba0dbc3c}} 
+delegate void {\bfseries Msg\+Recieved\+Event\+Handler} (\hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_msg_args}{Msg\+Args} e)
+\item 
+bool \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_ace95215a9d65215e30c8fe3582800878}{On\+Login\+Page} ()
+\begin{DoxyCompactList}\small\item\em Returns if the Login page and QR has loaded \end{DoxyCompactList}\item 
+bool \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a8784fc769ca33afbbdb7478f0998de19}{Is\+Phone\+Connected} ()
+\begin{DoxyCompactList}\small\item\em Check\textquotesingle{}s if we get the notification \char`\"{}\+Phone\+Not\+Connected\char`\"{} \end{DoxyCompactList}\item 
+string \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_ad181052c89c24e15d53aa81c1afe531c}{Get\+Q\+R\+Image\+R\+AW} ()
+\begin{DoxyCompactList}\small\item\em Gets raw QR string \end{DoxyCompactList}\item 
+Image \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_ac9738e95307e38b1ef493c1164edb60c}{Get\+Q\+R\+Image} ()
+\begin{DoxyCompactList}\small\item\em Gets an C\# image of the QR on the homepage \end{DoxyCompactList}\item 
+async Task \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a1da111623bfd6bee9401b049560e2646}{Message\+Scanner} ()
+\begin{DoxyCompactList}\small\item\em Checks for messages which enables On\+Msg\+Recieved event \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_aaa7e5947e31c9f475c95c9818f6c3a00}{Start\+Driver} (I\+Web\+Driver driver, string savefile)
+\begin{DoxyCompactList}\small\item\em Starts selenium driver, while loading a save file Note\+: these functions don\textquotesingle{}t make drivers \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a8108d46b4176fc74fb49626e8122df88}{Start\+Driver} ()
+\begin{DoxyCompactList}\small\item\em Starts selenium driver(only really used internally or virtually) Note\+: these functions don\textquotesingle{}t make drivers \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a3a26ad50a4ba508f1162402bc00e128b}{Start\+Driver} (I\+Web\+Driver driver)
+\begin{DoxyCompactList}\small\item\em Starts selenium driver Note\+: these functions don\textquotesingle{}t make drivers \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a03ddf85cb437ebabb7f3444d856bd8a7}{Save} (string File\+Name)
+\begin{DoxyCompactList}\small\item\em Saves settings and more to file \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a6e8b8b0fbf62bffb3e153f4003280626}{Load} (string File\+Name)
+\begin{DoxyCompactList}\small\item\em Loads a file containing Settings and cookies \end{DoxyCompactList}\item 
+string \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a9b62276c558e7e81cf507af854cdc0b2}{Get\+Lastest\+Text} (out string Pname)
+\begin{DoxyCompactList}\small\item\em Gets the latest test \end{DoxyCompactList}\item 
+void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a394d26a4172531e8149b5e084917dc99}{Send\+Message} (string message, string person=null)
+\begin{DoxyCompactList}\small\item\em Send message to person \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_chat_settings}{Chat\+Settings} \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_af7b5c73d834b7c97f6aa1947310af34e}{settings} = new \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_chat_settings}{Chat\+Settings}()
+\begin{DoxyCompactList}\small\item\em Current settings \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a797576c847b00eee08dd92693bd522c4}\label{class_web_whatsapp_a_p_i_1_1_base_class_a797576c847b00eee08dd92693bd522c4}} 
+void {\bfseries Raise\+\_\+\+Recieved\+Message} (string Msg, string Sender)
+\item 
+Image \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a3c18dac86c5b0a57ebfb1822e89518d8}{Base64\+To\+Image} (string base64\+String)
+\begin{DoxyCompactList}\small\item\em \href{https://stackoverflow.com/a/18827264}{\tt https\+://stackoverflow.\+com/a/18827264} \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a56a2f1cfc0bef6cad2aae521e9c4d20a}{Auto\+Save} ()
+\begin{DoxyCompactList}\small\item\em Saves to file \end{DoxyCompactList}\item 
+void \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a69c20548bf1e5d5e2ed200f6d44222e5}{Has\+Started\+Check} (bool Invert=false)
+\begin{DoxyCompactList}\small\item\em only for internal use; throws exception if the driver has already started(can be inverted) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a2887b40fd1edaad98a26848369f83864}\label{class_web_whatsapp_a_p_i_1_1_base_class_a2887b40fd1edaad98a26848369f83864}} 
+I\+Web\+Driver {\bfseries driver} = null
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a10068a3275629827584bda048227c456}\label{class_web_whatsapp_a_p_i_1_1_base_class_a10068a3275629827584bda048227c456}} 
+Event\+Firing\+Web\+Driver {\bfseries event\+Driver} = null
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_ac579478d77363feb4ffde2e9bcf48c21}\label{class_web_whatsapp_a_p_i_1_1_base_class_ac579478d77363feb4ffde2e9bcf48c21}} 
+bool {\bfseries Has\+Started}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+I\+Web\+Driver \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_afc0c364092139747b980a1ad6b1e2321}{Web\+Driver}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em A refrence to the Selenium Web\+Driver used; Selenium.\+Web\+Driver required \end{DoxyCompactList}\item 
+Event\+Firing\+Web\+Driver \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_a1db62394318cea6839e32f2820fb426f}{Event\+Driver}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em An event Web\+Driver from selenium; Selenium.\+Support package required \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a5baefb689c909b3db1816d274ea9596b}\label{class_web_whatsapp_a_p_i_1_1_base_class_a5baefb689c909b3db1816d274ea9596b}} 
+Msg\+Recieved\+Event\+Handler {\bfseries On\+Msg\+Recieved}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a56a2f1cfc0bef6cad2aae521e9c4d20a}\label{class_web_whatsapp_a_p_i_1_1_base_class_a56a2f1cfc0bef6cad2aae521e9c4d20a}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Auto\+Save@{Auto\+Save}}
+\index{Auto\+Save@{Auto\+Save}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Auto\+Save()}{AutoSave()}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Auto\+Save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Saves to file 
+
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a3c18dac86c5b0a57ebfb1822e89518d8}\label{class_web_whatsapp_a_p_i_1_1_base_class_a3c18dac86c5b0a57ebfb1822e89518d8}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Base64\+To\+Image@{Base64\+To\+Image}}
+\index{Base64\+To\+Image@{Base64\+To\+Image}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Base64\+To\+Image()}{Base64ToImage()}}
+{\footnotesize\ttfamily Image Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Base64\+To\+Image (\begin{DoxyParamCaption}\item[{string}]{base64\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+\href{https://stackoverflow.com/a/18827264}{\tt https\+://stackoverflow.\+com/a/18827264} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base64\+String} & Base 64 string\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an image
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a9b62276c558e7e81cf507af854cdc0b2}\label{class_web_whatsapp_a_p_i_1_1_base_class_a9b62276c558e7e81cf507af854cdc0b2}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Get\+Lastest\+Text@{Get\+Lastest\+Text}}
+\index{Get\+Lastest\+Text@{Get\+Lastest\+Text}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Get\+Lastest\+Text()}{GetLastestText()}}
+{\footnotesize\ttfamily string Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Get\+Lastest\+Text (\begin{DoxyParamCaption}\item[{out string}]{Pname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the latest test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Pname} & \mbox{[}Optional output\mbox{]} the person that send the message\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_ac9738e95307e38b1ef493c1164edb60c}\label{class_web_whatsapp_a_p_i_1_1_base_class_ac9738e95307e38b1ef493c1164edb60c}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Get\+Q\+R\+Image@{Get\+Q\+R\+Image}}
+\index{Get\+Q\+R\+Image@{Get\+Q\+R\+Image}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Get\+Q\+R\+Image()}{GetQRImage()}}
+{\footnotesize\ttfamily Image Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Get\+Q\+R\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an C\# image of the QR on the homepage 
+
+\begin{DoxyReturn}{Returns}
+QR image; returns null if not available
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_ad181052c89c24e15d53aa81c1afe531c}\label{class_web_whatsapp_a_p_i_1_1_base_class_ad181052c89c24e15d53aa81c1afe531c}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Get\+Q\+R\+Image\+R\+AW@{Get\+Q\+R\+Image\+R\+AW}}
+\index{Get\+Q\+R\+Image\+R\+AW@{Get\+Q\+R\+Image\+R\+AW}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Get\+Q\+R\+Image\+R\+A\+W()}{GetQRImageRAW()}}
+{\footnotesize\ttfamily string Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Get\+Q\+R\+Image\+R\+AW (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets raw QR string 
+
+\begin{DoxyReturn}{Returns}
+sting(base64) of the image; returns null if not available
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a69c20548bf1e5d5e2ed200f6d44222e5}\label{class_web_whatsapp_a_p_i_1_1_base_class_a69c20548bf1e5d5e2ed200f6d44222e5}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Has\+Started\+Check@{Has\+Started\+Check}}
+\index{Has\+Started\+Check@{Has\+Started\+Check}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Has\+Started\+Check()}{HasStartedCheck()}}
+{\footnotesize\ttfamily void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Has\+Started\+Check (\begin{DoxyParamCaption}\item[{bool}]{Invert = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+only for internal use; throws exception if the driver has already started(can be inverted) 
+
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a8784fc769ca33afbbdb7478f0998de19}\label{class_web_whatsapp_a_p_i_1_1_base_class_a8784fc769ca33afbbdb7478f0998de19}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Is\+Phone\+Connected@{Is\+Phone\+Connected}}
+\index{Is\+Phone\+Connected@{Is\+Phone\+Connected}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Is\+Phone\+Connected()}{IsPhoneConnected()}}
+{\footnotesize\ttfamily bool Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Is\+Phone\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check\textquotesingle{}s if we get the notification \char`\"{}\+Phone\+Not\+Connected\char`\"{} 
+
+\begin{DoxyReturn}{Returns}
+bool; true if connected
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a6e8b8b0fbf62bffb3e153f4003280626}\label{class_web_whatsapp_a_p_i_1_1_base_class_a6e8b8b0fbf62bffb3e153f4003280626}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Load@{Load}}
+\index{Load@{Load}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Load (\begin{DoxyParamCaption}\item[{string}]{File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Loads a file containing Settings and cookies 
+
+
+\begin{DoxyParams}{Parameters}
+{\em File\+Name} & path to Filename\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a1da111623bfd6bee9401b049560e2646}\label{class_web_whatsapp_a_p_i_1_1_base_class_a1da111623bfd6bee9401b049560e2646}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Message\+Scanner@{Message\+Scanner}}
+\index{Message\+Scanner@{Message\+Scanner}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Message\+Scanner()}{MessageScanner()}}
+{\footnotesize\ttfamily async Task Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Message\+Scanner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks for messages which enables On\+Msg\+Recieved event 
+
+\begin{DoxyReturn}{Returns}
+Nothing
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_ace95215a9d65215e30c8fe3582800878}\label{class_web_whatsapp_a_p_i_1_1_base_class_ace95215a9d65215e30c8fe3582800878}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!On\+Login\+Page@{On\+Login\+Page}}
+\index{On\+Login\+Page@{On\+Login\+Page}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{On\+Login\+Page()}{OnLoginPage()}}
+{\footnotesize\ttfamily bool Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+On\+Login\+Page (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns if the Login page and QR has loaded 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a03ddf85cb437ebabb7f3444d856bd8a7}\label{class_web_whatsapp_a_p_i_1_1_base_class_a03ddf85cb437ebabb7f3444d856bd8a7}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Save@{Save}}
+\index{Save@{Save}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Save (\begin{DoxyParamCaption}\item[{string}]{File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Saves settings and more to file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em File\+Name} & Path/\+Filename to make the file (e.\+g. save1.\+bin)\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a394d26a4172531e8149b5e084917dc99}\label{class_web_whatsapp_a_p_i_1_1_base_class_a394d26a4172531e8149b5e084917dc99}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Send\+Message()}{SendMessage()}}
+{\footnotesize\ttfamily void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Send\+Message (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{string}]{person = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Send message to person 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & string to send\\
+\hline
+{\em person} & person to send to (if null send to active)\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_aaa7e5947e31c9f475c95c9818f6c3a00}\label{class_web_whatsapp_a_p_i_1_1_base_class_aaa7e5947e31c9f475c95c9818f6c3a00}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Start\+Driver@{Start\+Driver}}
+\index{Start\+Driver@{Start\+Driver}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Start\+Driver()}{StartDriver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Start\+Driver (\begin{DoxyParamCaption}\item[{I\+Web\+Driver}]{driver,  }\item[{string}]{savefile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Starts selenium driver, while loading a save file Note\+: these functions don\textquotesingle{}t make drivers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & The driver\\
+\hline
+{\em savefile} & Path to savefile\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a8108d46b4176fc74fb49626e8122df88}\label{class_web_whatsapp_a_p_i_1_1_base_class_a8108d46b4176fc74fb49626e8122df88}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Start\+Driver@{Start\+Driver}}
+\index{Start\+Driver@{Start\+Driver}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Start\+Driver()}{StartDriver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Start\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Starts selenium driver(only really used internally or virtually) Note\+: these functions don\textquotesingle{}t make drivers 
+
+
+
+Reimplemented in \hyperlink{class_web_whatsapp_a_p_i_1_1_chrome_1_1_chrome_w_app_a2ed5da636b9baf0766bd6804739a9bfb}{Web\+Whatsapp\+A\+P\+I.\+Chrome.\+Chrome\+W\+App}, and \hyperlink{class_web_whatsapp_a_p_i_1_1_firefox_1_1_firefox_w_app_a80f406639e59bc4152b8f255962607f2}{Web\+Whatsapp\+A\+P\+I.\+Firefox.\+Firefox\+W\+App}.
+
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a3a26ad50a4ba508f1162402bc00e128b}\label{class_web_whatsapp_a_p_i_1_1_base_class_a3a26ad50a4ba508f1162402bc00e128b}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Start\+Driver@{Start\+Driver}}
+\index{Start\+Driver@{Start\+Driver}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Start\+Driver()}{StartDriver()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily virtual void Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Start\+Driver (\begin{DoxyParamCaption}\item[{I\+Web\+Driver}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Starts selenium driver Note\+: these functions don\textquotesingle{}t make drivers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & The selenium driver\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_af7b5c73d834b7c97f6aa1947310af34e}\label{class_web_whatsapp_a_p_i_1_1_base_class_af7b5c73d834b7c97f6aa1947310af34e}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!settings@{settings}}
+\index{settings@{settings}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{settings}{settings}}
+{\footnotesize\ttfamily \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_chat_settings}{Chat\+Settings} Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+settings = new \hyperlink{class_web_whatsapp_a_p_i_1_1_base_class_1_1_chat_settings}{Chat\+Settings}()}
+
+
+
+Current settings 
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_a1db62394318cea6839e32f2820fb426f}\label{class_web_whatsapp_a_p_i_1_1_base_class_a1db62394318cea6839e32f2820fb426f}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Event\+Driver@{Event\+Driver}}
+\index{Event\+Driver@{Event\+Driver}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Event\+Driver}{EventDriver}}
+{\footnotesize\ttfamily Event\+Firing\+Web\+Driver Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Event\+Driver\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+An event Web\+Driver from selenium; Selenium.\+Support package required 
+
+\mbox{\Hypertarget{class_web_whatsapp_a_p_i_1_1_base_class_afc0c364092139747b980a1ad6b1e2321}\label{class_web_whatsapp_a_p_i_1_1_base_class_afc0c364092139747b980a1ad6b1e2321}} 
+\index{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}!Web\+Driver@{Web\+Driver}}
+\index{Web\+Driver@{Web\+Driver}!Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class@{Web\+Whatsapp\+A\+P\+I\+::\+Base\+Class}}
+\subsubsection{\texorpdfstring{Web\+Driver}{WebDriver}}
+{\footnotesize\ttfamily I\+Web\+Driver Web\+Whatsapp\+A\+P\+I.\+Base\+Class.\+Web\+Driver\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+A refrence to the Selenium Web\+Driver used; Selenium.\+Web\+Driver required 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Web\+Whatsapp\+A\+P\+I/Base\+Class.\+cs\end{DoxyCompactItemize}
