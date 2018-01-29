@@ -122,7 +122,7 @@ namespace WebWhatsappBotCore
         {
             try
             {
-                if (driver.FindElement(By.XPath("//div[@class='qr-wrapper-container']")) != null)
+                if (driver.FindElement(By.XPath("//img[@alt='Scan me!']")) != null)
                 {
                     return true;
                 }
