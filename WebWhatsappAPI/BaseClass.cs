@@ -14,8 +14,8 @@ using System.Drawing.Imaging;
 using OpenQA.Selenium.Support.UI;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
-
+using MongoDB.Driver;
+using WebWhatsappBotCore.Models;
 
 namespace WebWhatsappBotCore
 {
@@ -127,7 +127,7 @@ namespace WebWhatsappBotCore
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -201,7 +201,7 @@ namespace WebWhatsappBotCore
         }
 
         /// <summary>
-        /// https://stackoverflow.com/a/18827264
+        ///  Base64ToImage
         /// </summary>
         /// <param name="base64String">Base 64 string</param>
         /// <returns>an image</returns>
@@ -220,63 +220,209 @@ namespace WebWhatsappBotCore
         /// <summary>
         /// Scans for messages but only retreaves if person is in PeopleList
         /// </summary>
-        /// <param name="PeopleList">List of People to filter on(case-sensitive)</param>
-        /// <param name="isBlackList"> is it a black- or whitelist (default whitelist)</param>
-        /// <returns>Nothing</returns>
-        public async void MessageScanner(string[] PeopleList, bool isBlackList = false)
+        public async void MessageScanner(bool useMongo = false)
         {
+            MongoDBContext context = null;
+            if (useMongo)
+            {
+                MongoDBContext.IsSSL = false;
+                MongoDBContext.DatabaseName = "Whats";
+                context = new MongoDBContext();
+            }
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+
             while (true)
             {
-                IReadOnlyCollection<IWebElement> unread = driver.FindElements(By.ClassName("unread"));
-                foreach (IWebElement x in unread.ToArray())//just in case
+
+                await Task.Delay(100);
+
+                String json = (String)js.ExecuteScript(Scripting.getAllChats) as String;
+
+                List<Msg> lista = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Msg>>(json);
+
+                var builder = Builders<Models.DBWhatsapp>.Filter;
+
+                foreach (var l in lista)
                 {
-                    var y = x.FindElement(By.ClassName("ellipsify"));
-                    if (PeopleList.Contains(y.GetAttribute("title")) != isBlackList)
-                     {
-                        try
+
+                    Raise_RecievedMessage(l.body, l.from);
+
+                    if (useMongo)
+                    {
+                        var filter = builder.Eq("Id", l.from);
+
+                        var queryMongo = context.Chats;
+
+                        var li = queryMongo.Find(filter).ToList();
+
+
+
+                        if (li.Count() == 0)
                         {
-                            x.Click();
-                            await Task.Delay(200);
-                            var Pname = "";
-                            var message_text = GetLastestText(out Pname);
-                            Raise_RecievedMessage(message_text, Pname);
-                        }catch(Exception ex)
+
+                            DBWhatsapp db = new DBWhatsapp();
+                            db.Id = l.from;
+                            db.Msgs = new List<Msg>();
+                            db.Msgs.Add(l);
+
+                            context.Chats.InsertOne(db);
+                        }
+                        else
                         {
+
+                            var update = Builders<Models.DBWhatsapp>.Update.Push<Models.Msg>(f => f.Msgs, l);
+                            var a = context.Chats.FindOneAndUpdate(filter, update);
+
+                            var filter3 = builder.Eq("Id", l.from);
+
+                            var queryMongo2 = context.Chats;
+
+                            var liTmp = queryMongo2.Find(filter3).ToList();
+
+                            context.Chats.ReplaceOne(item => item.MySuperId == liTmp.First().MySuperId, liTmp.First(), new UpdateOptions { IsUpsert = true });
 
                         }
                     }
+
                 }
-                await Task.Delay(50); 
+
+
             }
         }
 
-        /// <summary>
-        /// Checks for messages which enables OnMsgRecieved event
-        /// </summary>
-        /// <returns>Nothing</returns>
-        public async void MessageScanner()
+
+        public void SendMessageToName(string name, string message)
         {
-            while (true)
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            Boolean? sendFast = false;
+            int i = 0;
+            do
             {
-                IReadOnlyCollection<IWebElement> unread = driver.FindElements(By.ClassName("unread-count"));
-                if (unread.Count < 1)
+                sendFast = (Boolean?)js.ExecuteScript(Scripting.SendMessageByName, name, message) as Boolean?;
+                Thread.Sleep(1000);
+                i++;
+
+                if (i >= 3)
                 {
-                    Thread.Sleep(50); //we don't wan't too much overhead
-                    continue;
+                    sendFast = true;
                 }
+            } while (sendFast == false);
+        }
+
+        public void SendMessageToNumber(string number, string message)
+        {
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            Boolean? sendFast = false;
+            int i = 0;
+            number = getIdFromNumber(number);
+            do
+            {
+                sendFast = (Boolean?)js.ExecuteScript(Scripting.SendMessageByID, number, message) as Boolean?;
+                Thread.Sleep(1000);
+                i++;
+
+                if (i >= 3)
+                {
+                    sendFast = true;
+                }
+            } while (sendFast == false);
+        }
+
+        public bool createGroupFast(string nombreGrupo, string[] numerosGrupo)
+        {
+
+            for (int i = 0; i < numerosGrupo.Length; i++)
+            {
+                numerosGrupo[i] = getIdFromNumber(numerosGrupo[i]);
+            }
+
+
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            Boolean? created = false;
+            created = (Boolean?)js.ExecuteScript(Scripting.createGroup, nombreGrupo, string.Join(",", numerosGrupo)) as Boolean?;
+            return true;
+        }
+
+        public bool createGroup(string nombreGrupo, string[] numerosGrupo)
+        {
+            var chatbox = driver.FindElement(By.CssSelector("#side > header > div.pane-list-controls > div > span > div:nth-child(2) > div"));
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(chatbox);
+            actions.Click();
+            actions.Build().Perform();
+
+            initRoutine:
+
+            var chatbox2 = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > div._2sNbV > div:nth-child(1) > div > div:nth-child(1) > div > div.chat-avatar > div > span"));
+            actions.MoveToElement(chatbox2);
+            actions.Click();
+            actions.Build().Perform();
+
+            Thread.Sleep(2000);
+
+            foreach (var n in numerosGrupo)
+            {
                 try
                 {
-                    unread.ElementAt(0).Click(); //Goto (first) Unread chat
+                    var chatbox3 = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > div > div._66JgU > div > div > input"));
+                    chatbox3.Click();
+                    chatbox3.SendKeys(n);
+                    chatbox3.SendKeys(OpenQA.Selenium.Keys.Enter);
+
+
                 }
-                catch (Exception)
+                catch
                 {
-                } //DEAL with Stale elements
-                await Task.Delay(200); //Let it load
-                var Pname = "";
-                var message_text = GetLastestText(out Pname);
-                Raise_RecievedMessage(message_text, Pname);
+                    Thread.Sleep(1000);
+                    goto initRoutine;
+                }
+
             }
+
+
+            try
+            {
+                var x = driver.FindElement(By.XPath("//span[text() = 'No se encontraron contactos']"));
+
+                if (x != null)
+                {
+                    var back = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > header > div > div > button > span"));
+
+                    back.Click();
+
+                    Thread.Sleep(500);
+
+                    back = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > header > div > div > button > span"));
+
+                    back.Click();
+
+
+                    Console.WriteLine("Fail Group request " + DateTime.Now.ToString());
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            var chatbox4 = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > div > span > div > span"));
+            chatbox4.Click();
+
+
+            var chatbox5 = driver.FindElement(By.CssSelector("#app > div > div > div.MZIyP > div._3q4NP.k1feT > span > div > span > div > div > div:nth-child(2) > div > div._1DTd4 > div.pluggable-input.pluggable-input-default > div.pluggable-input-body.copyable-text.selectable-text"));
+            chatbox5.Click();
+            chatbox5.SendKeys(nombreGrupo);
+            chatbox5.SendKeys(OpenQA.Selenium.Keys.Enter);
+
+
+            Console.WriteLine("OK " + DateTime.Now.ToString());
+
+            return true;
+
         }
+
 
         /// <summary>
         /// Starts selenium driver, while loading a save file
@@ -389,11 +535,12 @@ namespace WebWhatsappBotCore
             try
             {
                 messages = driver.FindElements(By.ClassName("msg"));
-                    //.FindElements(By.XPath("*"));
+
             }
             catch (Exception)
             {
-            } //DEAL with Stale elements
+            }
+
             var newmessage = messages.OrderBy(x => x.Location.Y).Reverse().First(); //Get latest message
             try
             {
@@ -402,7 +549,7 @@ namespace WebWhatsappBotCore
             }
             catch
             {
-                
+
             }
 
             try
@@ -522,7 +669,7 @@ namespace WebWhatsappBotCore
             actions.MoveToElement(chatbox);
             actions.Click();
             actions.SendKeys(message);
-           
+
             actions.SendKeys(OpenQA.Selenium.Keys.Enter);
             actions.Build().Perform();
 
@@ -532,7 +679,7 @@ namespace WebWhatsappBotCore
             chatbox.SendKeys(Keys.Enter);*/
         }
 
-        public void SetActivePersonFirst(String name)
+        public bool SetActivePersonFirst(String name)
         {
             IReadOnlyCollection<IWebElement> AllChats = driver.FindElements(By.ClassName("chat-title"));
             foreach (var we in AllChats)
@@ -542,40 +689,72 @@ namespace WebWhatsappBotCore
                 {
                     Title.Click();
                     Thread.Sleep(300);
-                    return;
+                    return true;
                 }
             }
             Console.WriteLine("Can't find person, not sending");
+            return false;
         }
 
+        String code = "521";
+
+        private string getIdFromNumber(string number)
+        {
+            if (number.Contains("@")) return number;
+            return code + number + "@c.us";
+        }
 
         public void SendMessageToNumber(string number, string name, string message)
         {
-            var chatbox = driver.FindElement(By.ClassName("icon-search-morph"));
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(chatbox);
-            actions.Click();
-            actions.Build().Perform();
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
 
-            var chatbox2 = driver.FindElement(By.CssSelector("#side > div.chatlist-panel-search > div > label > input"));
-            //var javascriptDriver = this.driver as IJavaScriptExecutor;
-           
-            
-            Thread.Sleep(500);
+            Boolean? sendFast = (Boolean?)js.ExecuteScript(Scripting.SendMessageByID, getIdFromNumber(number), message) as Boolean?;
 
-            //javascriptDriver.ExecuteScript("document.getElementsByClassName('input-search copyable-text selectable-text')[0].value = '" + number + "'");
+            if (sendFast == null || sendFast == false)
+            {
 
-            actions.MoveToElement(chatbox2);
-            actions.Click();
-            actions.SendKeys(number);
-            
-            actions.Build().Perform();
+                var chatbox = driver.FindElement(By.ClassName("icon-search-morph"));
+                Actions actions = new Actions(driver);
+                actions.MoveToElement(chatbox);
+                actions.Click();
+                actions.Build().Perform();
 
-            Thread.Sleep(1500);
+                var chatbox2 = driver.FindElement(By.CssSelector("#side > div.chatlist-panel-search > div > label > input"));
 
-            SetActivePersonFirst(name);
+                Thread.Sleep(500);
 
-            SendMessage(message);
+
+                actions.MoveToElement(chatbox2);
+                actions.Click();
+                actions.SendKeys(number);
+
+                actions.Build().Perform();
+
+                Thread.Sleep(2000);
+
+                if (SetActivePersonFirst(name))
+                {
+                    SendMessage(message);
+                }
+                else
+                {
+                    var back = driver.FindElement(By.ClassName("icon-morph-back"));
+                    actions.MoveToElement(back);
+                    actions.Click();
+
+                    actions.Build().Perform();
+
+                }
+
+
+            }
+        }
+
+
+        public void getGroups()
+        {
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+
         }
 
 
@@ -655,9 +834,6 @@ namespace WebWhatsappBotCore
                 Thread.Sleep(5000);
                 SendKeys.SendWait("{RIGHT}");
                 SendKeys.SendWait("{ENTER}");
-                //SendKeys.SendWait("{TAB}");
-                //SendKeys.Send("^A");
-                //SendKeys.SendWait("{ENTER}");
             }
         }
 
@@ -669,7 +845,7 @@ namespace WebWhatsappBotCore
             }
             var outp = message.ToWhatsappText();
             var chatbox = driver.FindElement(By.CssSelector("#main > header > div.pane-chat-controls > div > div:nth-child(2) > div"));
-            //DropFile(chatbox, @"C:\Users\Zet\Pictures\credencial\11937449_1496953950602168_2839239085099833248_n.jpg");
+
 
             Actions actions = new Actions(driver);
             actions.MoveToElement(chatbox);
@@ -681,18 +857,10 @@ namespace WebWhatsappBotCore
             var chatbox2 = driver.FindElement(By.XPath("//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button"));
             actions.MoveToElement(chatbox2);
             actions.Click();
-            //actions.SendKeys(@"C:\Users\Zet\Pictures\credencial\11937449_1496953950602168_2839239085099833248_n.jpg");
+
             actions.Build().Perform();
 
             UploadFile(@"C:\Users\Zet\Pictures\ano.jpg");
-            /*actions.SendKeys(message);
-            actions.SendKeys(Keys.Enter);
-            actions.Build().Perform();*/
-
-            /*chatbox.Click();
-            
-            chatbox.SendKeys(outp);
-            chatbox.SendKeys(Keys.Enter);*/
         }
 
         /// <summary>

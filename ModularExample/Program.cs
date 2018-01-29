@@ -31,6 +31,7 @@ namespace DanielExample
                 case "Start":
                 case "1":
                     Start(new WebWhatsappBotCore.Chrome.ChromeWApp());
+
                     break;
                 case "Configure":
                 case "2":
@@ -50,8 +51,8 @@ namespace DanielExample
             _driver = driver;
             driver.StartDriver();
             
-            driver.OnMsgRecieved += OnMsgRec; 
-            Task.Run(() => driver.MessageScanner(new[] { "zetdeveloper" },true));
+            driver.OnMsgRecieved += OnMsgRec;
+            Task.Run(() => driver.MessageScanner());
 
            
 
@@ -72,28 +73,27 @@ namespace DanielExample
 
                 var octocat = gitHubApi.GetPokemon(idPokemon);
                
-                _driver.SendMessage(octocat.Result.Forms[0].Name);
+                _driver.SendMessageToNumber(arg.Sender, "your pokemon is: " + octocat.Result.Forms[0].Name);
+            }
+
+            if (arg.Msg.ToLower().StartsWith("/group"))
+            {
+                string[] argr = arg.Msg.Split('-');
+
+                String nombreGrupo = argr[1].Trim();
+                string[] numerosGrupo = argr[2].Split(' ');
+                numerosGrupo = numerosGrupo.Where(x => x != "").ToArray();
+
+                _driver.createGroupFast(nombreGrupo, numerosGrupo);
+                Thread.Sleep(500);
+                _driver.SendMessageToName(nombreGrupo, nombreGrupo);
+
+
             }
 
             if (arg.Msg.ToLower().StartsWith("/number"))
             {
-                Thread thread = new Thread(() => Clipboard.SetText(arg.Msg.Split('-')[3]));
-                thread.SetApartmentState(ApartmentState.STA); 
-                //Set the thread to STA
-                thread.Start();
-                thread.Join();
-
-                
                 _driver.SendMessageToNumber(arg.Msg.ToLower().Split('-')[1], arg.Msg.ToLower().Split('-')[2], arg.Msg.Split('-')[3]);
-            }
-
-            if (arg.Msg.ToLower().StartsWith("/image"))
-            {
-                _driver.SendMessageImage("",arg.Sender);
-            }
-            else
-            {
-                //_driver.SendMessage(arg.Sender + " type " + arg.Msg, arg.Sender);
             }
 
           
