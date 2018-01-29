@@ -12,5 +12,6 @@ namespace DanielExample.Rest
     {
         [Get("/pokemon/{number}")]
         Task<Pokemon> GetPokemon(string number);
+
     }
 }
