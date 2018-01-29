@@ -816,51 +816,39 @@ namespace WebWhatsappBotCore
             wait.Until(ExpectedConditions.StalenessOf(input));
         }
 
-        [DllImport("user32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-        public void UploadFile(string fileName)
-        {
-            var dialogHWnd = FindWindow(null, "Abrir");
-            var setFocus = true;
-            if (setFocus)
-            {
-                Thread.Sleep(500);
-                SendKeys.SendWait(fileName);
-                Thread.Sleep(5000);
-                SendKeys.SendWait("{RIGHT}");
-                SendKeys.SendWait("{ENTER}");
-            }
-        }
-
         public void SendMessageImage(string message, string person = null)
         {
-            if (person != null)
-            {
-                SetActivePerson(person);
-            }
-            var outp = message.ToWhatsappText();
-            var chatbox = driver.FindElement(By.CssSelector("#main > header > div.pane-chat-controls > div > div:nth-child(2) > div"));
-
-
             Actions actions = new Actions(driver);
-            actions.MoveToElement(chatbox);
-            actions.Click();
-            //actions.ContextClick();
-            actions.Build().Perform();
-            Thread.Sleep(500);
+            // Variables for page elements
+            // Attach menu
+            var attach_xpath = "//*[@id='main']/header/div[3]/div/div[2]/div";
+            // Attach option - img
+            var attach_type_xpath = "//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/input";
+            // Attach option - cam
+            //attach_type_xpath = '//*[@id="main"]/header/div[3]/div/div[2]/span/div/div/ul/li[2]/button' 
+            // Attach option - doc
+            //attach_type_xpath = '//*[@id="main"]/header/div[3]/div/div[2]/span/div/div/ul/li[3]/input' 
 
-            var chatbox2 = driver.FindElement(By.XPath("//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button"));
-            actions.MoveToElement(chatbox2);
-            actions.Click();
+            try
+            {
+                // Open attach menu
+                var attach_btn = driver.FindElement(By.XPath(attach_xpath));
+                attach_btn.Click();
 
-            actions.Build().Perform();
+                // Find file type btn
+                Thread.Sleep(500);
+                var attach_img_btn = driver.FindElement(By.XPath(attach_type_xpath));
 
-            UploadFile(@"C:\Users\Zet\Pictures\ano.jpg");
+                // Upload file and send
+                attach_img_btn.SendKeys(@"C:\Users\Public\Pictures\img.png");           // Current img path
+                Thread.Sleep(2000);                                                     // Time to load an image - 2 seg
+                actions.SendKeys(OpenQA.Selenium.Keys.Enter);                           // Send
+                actions.Build().Perform();
+            }
+            catch (Exception excep)                                                     // Internal use only to check for errors
+            {
+                Console.Out.WriteLine("Error: "+excep);                                 // Show error(s) in console
+            }
         }
 
         /// <summary>
