@@ -4,7 +4,7 @@
 - We do NOT give support to anyone that wants this API to send massive messages or similar.
 - We reserve the right to block any user of this repository that does not meet these conditions.
 
-# WebWhatsappBot
+# Changelog v1.1
 - Using mongo to save messages (is optional)
 - Greater performance to detect new messages
 - Creation of groups
