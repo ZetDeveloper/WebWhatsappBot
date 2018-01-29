@@ -14,8 +14,7 @@ Commands added:
 - / pokemon 31
 - / group -name of group -2211111111 2211111111
 
-This first command returns a pokemon name
-the second command creates a group
+This first command returns a pokemon name, the second command creates a group
 
 
 # License
