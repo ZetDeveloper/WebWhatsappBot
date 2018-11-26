@@ -1,6 +1,6 @@
 - Other numer | You bot
 
-![](name-of-giphy.gif)
+![](videobot.gif)
 
 
 # Instructions
