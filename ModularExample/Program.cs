@@ -50,7 +50,10 @@ namespace DanielExample
         {
             _driver = driver;
             driver.StartDriver();
-            
+
+            Console.WriteLine("Press enter after scan QRCode");
+            Console.ReadKey();
+
             driver.OnMsgRecieved += OnMsgRec;
             Task.Run(() => driver.MessageScanner());
 

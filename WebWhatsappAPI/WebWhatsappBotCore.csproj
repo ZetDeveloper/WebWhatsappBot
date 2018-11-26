@@ -73,6 +73,7 @@
     <Compile Include="BaseClass.cs" />
     <Compile Include="Chrome.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="MicroServer.cs" />
     <Compile Include="Models\DBWhatsapp.cs" />
     <Compile Include="MongoDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

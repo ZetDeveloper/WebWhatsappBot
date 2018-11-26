@@ -4,13 +4,26 @@ namespace WebWhatsappBotCore.Chrome
 {
     public class ChromeWApp : IWebWhatsappDriver
     {
-        ChromeOptions ChromeOP;
+        ChromeOptions chrome_options;
         /// <summary>
         /// Make a new ChromeWhatsapp Instance
         /// </summary>
         public ChromeWApp()
         {
-            ChromeOP = new ChromeOptions() { LeaveBrowserRunning = false};
+            chrome_options = new ChromeOptions() ;
+            chrome_options.LeaveBrowserRunning = false;
+            chrome_options.AddExtension("dan.zip");
+            chrome_options.AddArgument("--disable-web-security");
+            chrome_options.AddArgument("--allow-running-insecure-content");
+            chrome_options.AddArguments("--test-type");
+            //chrome_options.AddArguments("--start-maximized");
+            chrome_options.AddArguments("--disable-web-security");
+            //chrome_options.AddArguments("--user-data-dir=D:\\chrome");
+            chrome_options.AddArguments("--allow-file-access-from-files");
+            chrome_options.AddArguments("--allow-running-insecure-content");
+            chrome_options.AddArguments("--allow-cross-origin-auth-prompt");
+            chrome_options.AddArguments("--allow-file-access");
+
         }
 
         /// <summary>
@@ -19,7 +32,7 @@ namespace WebWhatsappBotCore.Chrome
         public override void StartDriver()
         {
             HasStartedCheck();
-            var drive = new ChromeDriver(ChromeOP);
+            var drive = new ChromeDriver(chrome_options);
             base.StartDriver(drive);
         }
         /// <summary>
@@ -30,7 +43,7 @@ namespace WebWhatsappBotCore.Chrome
         public void AddExtension(string path)
         {
             HasStartedCheck();
-            ChromeOP.AddExtension(path);
+            chrome_options.AddExtension(path);
         }
         /// <summary>
         /// Adds an base64 encoded extension
@@ -40,7 +53,7 @@ namespace WebWhatsappBotCore.Chrome
         public void AddExtensionBase64(string base64)
         {
             HasStartedCheck();
-            ChromeOP.AddEncodedExtension(base64);
+            chrome_options.AddEncodedExtension(base64);
         }
         /// <summary>
         /// Adds an argument when chrome is started
@@ -50,7 +63,7 @@ namespace WebWhatsappBotCore.Chrome
         public void AddStartArgument(params string[] arg)
         {
             HasStartedCheck();
-            ChromeOP.AddArguments(arg);
+            chrome_options.AddArguments(arg);
         }
     }
 }
