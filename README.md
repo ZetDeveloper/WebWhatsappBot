@@ -1,3 +1,12 @@
+# Instructions
+
+- Put 'dan.zip'file in debug folder 
+- Press 1 in console
+- Scan QR Code
+- After scan QR Code press Enter
+- To test: send a message that you use to scan, to try pokemon send the message -> / pokemon 3
+
+
 # WebWhatsappBot
 
 - You will NOT use this API for marketing purposes (spam, massive sending...).
