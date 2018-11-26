@@ -45,5 +45,13 @@ namespace WebWhatsappBotCore
                 return _database.GetCollection<DBWhatsapp>("Chats");
             }
         }
+
+        public IMongoCollection<Msg> Msg
+        {
+            get
+            {
+                return _database.GetCollection<Msg>("Msg");
+            }
+        }
     }
     }
